@@ -1,0 +1,47 @@
+#define _CRT_SECURE_NO_WARNINGS 1	
+#include<stdio.h>
+void bit_set(unsigned char *p_data, unsigned char position, int flag)
+{
+	int ret = flag;
+	position = (int)position;
+	position = 8 - position;
+	flag = 1<<position;
+	if (ret == 1)
+	{
+		(*p_data) |= flag; 
+	}
+	else
+	{
+		flag = ~flag; (*p_data) &= flag;
+	}
+}
+void binary_number(unsigned char *p_data)
+{
+	int count = 8;
+	int ret= 1,flag=7;
+	while (count--)
+	{
+		ret = 1;
+		ret = ret << flag;
+		if ((*p_data) & ret)
+		{
+			printf("1 ");
+		}
+		else printf("0 ");
+		flag--;
+	}
+	printf("\n");
+}
+int main()
+{
+	unsigned char data , position;
+	int flag = 0;
+	unsigned char *p_data = &data;
+	printf("input data position and flag:");
+	scanf("%d%d", &data,&position, &flag);	
+	binary_number(p_data);
+	bit_set(p_data, position, flag);
+	binary_number(p_data);
+	system("pause");
+	return 0;
+}
